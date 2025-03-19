@@ -41,6 +41,12 @@ const CodeWindow = styled(Box)({
   padding: 20,
   flex: 1,
   overflow: 'auto',
+  maxWidth: '100%',
+  '& pre': {
+    whiteSpace: 'pre-wrap',
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+  },
 });
 
 interface CodeFrameProps {
@@ -55,9 +61,26 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
   const currentSample = currentFramework.samples[selectedTab as keyof typeof currentFramework.samples];
 
   return (
-    <Stack direction="row" sx={{ height: '100%', backgroundColor: '#252525' }}>
+    <Stack 
+      direction={{ xs: 'column', sm: 'row' }} 
+      sx={{ 
+        height: '100%', 
+        backgroundColor: '#252525',
+        '& pre': {
+          padding: { xs: '0.5rem', sm: '1rem' },
+          fontSize: { xs: '0.875rem', sm: '1rem' }
+        }
+      }}
+    >
       {/* Framework sidebar */}
-      <Stack sx={{ borderRight: '1px solid #333' }}>
+      <Stack 
+        direction={{ xs: 'row', sm: 'column' }}
+        sx={{ 
+          borderRight: { sm: '1px solid #333' },
+          borderBottom: { xs: '1px solid #333', sm: 'none' },
+          overflowX: { xs: 'auto', sm: 'visible' }
+        }}
+      >
         {frameworks.map((framework) => (
           <FrameworkButton
             key={framework.id}
@@ -69,7 +92,12 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
       </Stack>
 
       {/* Main content area */}
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ 
+        flex: 1, 
+        display: 'flex', 
+        flexDirection: 'column',
+        minWidth: 0
+      }}>
         {/* Tab navigation */}
         <Tabs
           value={selectedTab}
@@ -84,9 +112,9 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
               },
             },
           }}>
-          <Tab value="login" label="Login Endpoint" />
-          <Tab value="callback" label="Callback Endpoint" />
-          <Tab value="logout" label="Logout Endpoint" />
+          <Tab value="login" label="Login" />
+          <Tab value="callback" label="Callback" />
+          <Tab value="logout" label="Logout" />
         </Tabs>
 
         {/* Code display */}

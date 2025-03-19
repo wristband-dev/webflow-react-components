@@ -65,7 +65,7 @@ const NextIcon = () => (
       icon: <NextIcon />,
       samples: {
         login: {
-          name: 'Login Endpoint',
+          name: 'Login',
           language: 'typescript',
           code: `import type { NextRequest } from 'next/server';
   import wristbandAuth from '@/wristband-auth.ts';
@@ -75,7 +75,7 @@ const NextIcon = () => (
   }`,
         },
         callback: {
-          name: 'Callback Endpoint',
+          name: 'Callback',
           language: 'typescript',
           code: `import { NextRequest, NextResponse } from 'next/server';
   import { CallbackResultType } from '@wristband/nextjs-auth';
@@ -91,7 +91,7 @@ const NextIcon = () => (
   }`,
         },
         logout: {
-          name: 'Logout Endpoint',
+          name: 'Logout',
           language: 'typescript',
           code: `import type { NextRequest } from 'next/server';
   import { cookies } from 'next/headers';
@@ -116,7 +116,7 @@ const NextIcon = () => (
       icon: <NodeIcon />,
       samples: {
         login: {
-          name: 'Login Endpoint',
+          name: 'Login',
           language: 'javascript',
           code: `import { wristbandAuth } from './wristband-auth.js';
   
@@ -126,7 +126,7 @@ const NextIcon = () => (
   });`,
         },
         callback: {
-          name: 'Callback Endpoint',
+          name: 'Callback',
           language: 'javascript',
           code: `import type { CallbackResultType } from '@wristband/express-auth';
   import { wristbandAuth } from './wristband-auth.js';
@@ -143,7 +143,7 @@ const NextIcon = () => (
   });`,
         },
         logout: {
-          name: 'Logout Endpoint',
+          name: 'Logout',
           language: 'javascript',
           code: `import { wristbandAuth } from './wristband-auth.js';
   
@@ -167,7 +167,7 @@ const NextIcon = () => (
       icon: <NestIcon />,
       samples: {
         login: {
-          name: 'Login Endpoint',
+          name: 'Login',
           language: 'typescript',
           code: `import { Controller, Get, Inject, Req, Res } from '@nestjs/common';
   import { env } from 'node:process';
@@ -183,7 +183,7 @@ const NextIcon = () => (
   }`,
         },
         callback: {
-          name: 'Callback Endpoint',
+          name: 'Callback',
           language: 'typescript',
           code: `import { Request, Response } from 'express';
   import { CallbackResult, CallbackResultType, WristbandExpressAuthService, } from '@wristband/nestjs-auth';
@@ -201,7 +201,7 @@ const NextIcon = () => (
   }`,
         },
         logout: {
-          name: 'Logout Endpoint',
+          name: 'Logout',
           language: 'typescript',
           code: `import { Controller, Get, Inject, Req, Res } from '@nestjs/common';
   import { Request, Response } from 'express';
@@ -227,7 +227,7 @@ const NextIcon = () => (
       icon: <DotNetIcon />,
       samples: {
         login: {
-          name: 'Login Endpoint',
+          name: 'Login',
           language: 'go',
           code: `using Microsoft.AspNetCore.Http;
   using Wristband.AspNet.Auth;
@@ -240,7 +240,7 @@ const NextIcon = () => (
   })`,
         },
         callback: {
-          name: 'Callback Endpoint',
+          name: 'Callback',
           language: 'go',
           code: `using Microsoft.AspNetCore.Http;
   using Wristband.AspNet.Auth;
@@ -258,7 +258,7 @@ const NextIcon = () => (
   });`,
         },
         logout: {
-          name: 'Logout Endpoint',
+          name: 'Logout',
           language: 'go',
           code: `using Microsoft.AspNetCore.Http;
   using Wristband.AspNet.Auth;
@@ -288,7 +288,7 @@ export const CodeFrameDemo: React.FC = () => {
   return (
     <Box sx={{ 
       width: '100%', 
-      height: '400px', // Adjust height as needed
+      height: '500px', // Adjust height as needed
       maxWidth: '1000px', // Optional: limit max width
       margin: '0 auto', // Optional: center in page
     }}>
