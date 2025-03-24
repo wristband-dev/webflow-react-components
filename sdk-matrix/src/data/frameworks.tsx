@@ -205,7 +205,7 @@ export class AuthController {
       language: 'typescript',
       code: `import { Controller, Get, Inject, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { WristbandExpressAuthService, } from '@wristband/nestjs-auth';
+import { WristbandExpressAuthService } from '@wristband/nestjs-auth';
 
 @Controller('api/v1/auth')
 export class AuthController {
