@@ -55,17 +55,13 @@ npm run build
 This creates a `dist` directory containing:
 
 - `wristband-sdk-matrix.js` - Main entry point
-- `assets/` directory containing:
-  - `vendor.js` - Vendor dependencies (MUI, Emotion, Prism)
-  - `vendor.css` - Vendor styles
-  - Image assets (SVG, WebP, etc.)
+- `assets/` directory containing image assets (SVG, WebP, etc.)
 
 #### Build Configuration
 
 The build is configured to:
 
-- Externalize React and ReactDOM (they're loaded separately in Webflow)
-- Bundle third-party dependencies into a vendor chunk for better caching
+- Externalize React, ReactDOM, and any Google Font (they're loaded separately in Webflow)
 - Apply the correct base URL for assets based on your environment variables and version
 
 

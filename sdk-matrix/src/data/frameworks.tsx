@@ -22,7 +22,7 @@ public static class AuthRoutes
             HttpContext context,
             IWristbandAuthService wristbandAuth) =>
         {
-            // Call the Wristband Login() method and redirect to the resulting URL.
+            // Call the Wristband Login() method and redirect to Wristband's hosted login page.
             var wristbandAuthorizeUrl = await wristbandAuth.Login(context, null);
             return Results.Redirect(wristbandAuthorizeUrl);
         });
@@ -42,7 +42,7 @@ app.MapGet("/auth/callback", async (
     HttpContext httpContext,
     IWristbandAuthService wristbandAuth) =>
 {
-    // Call the Wristband Callback() method to get results, token data, and user info.
+    // Call the Wristband Callback() method to get authentication results, token data, and user info.
     var callbackResult = await wristbandAuth.Callback(httpContext);
 
     // ...save session data...
@@ -99,7 +99,7 @@ const app = express();
 
 // Login Endpoint - Route path can be whatever you prefer
 app.get('/auth/login', async (req, res) => {
-  // Call the Wristband login() function to redirect to Wristband's Authorize URL.
+  // Call the Wristband login() function to redirect to Wristband's hosted login page.
   await wristbandAuth.login(req, res);
 });
 
@@ -115,7 +115,7 @@ import { wristbandAuth } from './wristband-auth.ts';
 
 // Callback Endpoint - Route path can be whatever you prefer
 app.get('/auth/callback', async (req, res) => {
-  // Call the Wristband callback() function to get results, token data, and user info.
+  // Call the Wristband callback() function to get authentication results, token data, and user info.
   const callbackResult = await wristbandAuth.callback(req, res);
   const { callbackData } = callbackResult;
 
@@ -169,7 +169,7 @@ export class AuthController {
   // Login Endpoint - Route path can be whatever you prefer
   @Get('login')
   async login(@Req() req: Request, @Res() res: Response) {
-    // Call the Wristband login() function to redirect to Wristband's Authorize URL.
+    // Call the Wristband login() function to redirect to Wristband's hosted login page.
     return await this.wristbandAuth.login(req, res);
   }
 
@@ -188,7 +188,7 @@ export class AuthController {
   // Callback Endpoint - Route path can be whatever you prefer
   @Get('callback')
   async callback(@Req() req: Request, @Res() res: Response) {
-    // Call the Wristband callback() function to get results, token data, and user info.
+    // Call the Wristband callback() function to get authentication results, token data, and user info.
     const callbackResult: CallbackResult = await this.wristbandAuthService.callback(req, res);
     const { callbackData } = callbackResult;
 
@@ -241,7 +241,7 @@ import wristbandAuth from '@/wristband-auth.ts';
 
 // Login Endpoint
 export async function GET(req: NextRequest) {
-  // Call the Wristband login() function to redirect to Wristband's Authorize URL.
+  // Call the Wristband login() function to redirect to Wristband's hosted login page.
   return await wristbandAuth.appRouter.login(req);
 }`,
     },
@@ -255,7 +255,7 @@ import wristbandAuth from '@/wristband-auth.ts';
 
 // Callback Endpoint
 export async function GET(req: NextRequest) {
-  // Call the Wristband callback() function to get results, token data, and user info.
+  // Call the Wristband callback() function to get authentication results, token data, and user info.
   const callbackResult = await wristbandAuth.appRouter.callback(req);
   const { callbackData } = callbackResult;
   const session = await getSession();
