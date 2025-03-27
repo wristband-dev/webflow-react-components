@@ -15,37 +15,37 @@ type IconProps = {
 }
 
 export const DotnetIcon = ({ selected }: IconProps) => (
-  <Box
-    component="img"
+  <img
     alt='dotnet icon'
     src={selected ? dotnetLogoBlack : dotnetLogoWhite}
-    sx={{ width: 44, height: 44, transition: 'filter 0.3s ease' }}
+    style={{ width: '44px', height: '44px', transition: 'filter 0.3s ease' }}
+    loading="eager"
   />
 );
 
 export const ExpressIcon = ({ selected }: IconProps) => (
-  <Box
-    component="img"
+  <img
     alt='express icon'
     src={selected ? expressLogoBlack : expressLogoWhite}
-    sx={{ width: 44, height: 44, transition: 'filter 0.3s ease' }}
+    style={{ width: '44px', height: '44px', transition: 'filter 0.3s ease' }}
+    loading="eager"
   />
 );
 
 export const NestIcon = ({ selected }: IconProps) => (
-  <Box
-    component="img"
+  <img
     alt='nestjs icon'
     src={selected ? nestJsLogoBlack : nestJsLogoWhite}
-    sx={{ width: 44, height: 44, transition: 'filter 0.3s ease' }}
+    style={{ width: '44px', height: '44px', transition: 'filter 0.3s ease' }}
+    loading="eager"
   />
 );
 
 export const NextIcon = ({ selected }: IconProps) => (
-  <Box
-    component="img"
+  <img
     alt='nextjs icon'
     src={selected ? nextJsLogoBlack : nextJsLogoWhite}
-    sx={{ width: 44, height: 44, transition: 'filter 0.3s ease' }}
+    style={{ width: '44px', height: '44px', transition: 'filter 0.3s ease' }}
+    loading="eager"
   />
 );
