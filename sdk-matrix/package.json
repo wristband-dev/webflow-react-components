@@ -1,7 +1,7 @@
 {
   "name": "@wristband/webflow-react-components__sdk-matrix",
   "description": "An interactive display showcasing code examples across multiple frameworks for integrating with core Wristband auth endpoints.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Wristband",
   "license": "MIT",
   "private": false,

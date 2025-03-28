@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 import { CodeFrame } from './code-frame';
-import { frameworks } from '@/data/frameworks';
+import { frameworks } from '@/data/framework-data';
 
 export const SdkMatrix: React.FC = () => {
   return (
