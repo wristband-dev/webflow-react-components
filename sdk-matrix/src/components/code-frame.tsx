@@ -51,7 +51,8 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
             <FrameworkButton
               key={framework.id}
               selected={isSelected}
-              onClick={() => setSelectedFramework(framework.id)}>
+              onClick={() => setSelectedFramework(framework.id)}
+            >
               {framework.icon(isSelected)}
             </FrameworkButton>
           );
