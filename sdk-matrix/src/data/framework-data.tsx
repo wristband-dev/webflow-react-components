@@ -23,8 +23,8 @@ public static class AuthRoutes
             IWristbandAuthService wristbandAuth) =>
         {
             // Call the Wristband Login() method and redirect to Wristband's hosted login page.
-            var wristbandAuthorizeUrl = await wristbandAuth.Login(context, null);
-            return Results.Redirect(wristbandAuthorizeUrl);
+            var authorizeUrl = await wristbandAuth.Login(context, null);
+            return Results.Redirect(authorizeUrl);
         });
 
         // ...other endpoints here...
@@ -48,12 +48,12 @@ app.MapGet("/auth/callback", async (
     // ...save session data...
     await httpContext.SignInAsync(
         CookieAuthenticationDefaults.AuthenticationScheme, 
-        new ClaimsPrincipal(identity), 
+        new ClaimsPrincipal(identity),
         new AuthenticationProperties { IsPersistent = true });
 
     // Send the user back to the application.
     var tenantDomain = callbackResult.CallbackData.TenantDomainName;
-    return Results.Redirect($"https://{tenantDomain}.example.com");      
+    return Results.Redirect($"https://{tenantDomain}.example.com");
 });`,
     },
     logout: {
@@ -76,8 +76,8 @@ app.MapGet("/auth/logout", async (
 
     // Call the Wristband Logout() method and redirect to the resulting URL.
     const logoutConfig = new LogoutConfig { RefreshToken, TenantDomainName }
-    var wristbandLogoutUrl = await wristbandAuth.Logout(httpContext, logoutConfig);
-    return Results.Redirect(wristbandLogoutUrl);
+    var logoutUrl = await wristbandAuth.Logout(httpContext, logoutConfig);
+    return Results.Redirect(logoutUrl);
 });`,
     },
   },
@@ -99,8 +99,9 @@ const app = express();
 
 // Login Endpoint - Route path can be whatever you prefer
 app.get('/auth/login', async (req, res) => {
-  // Call the Wristband login() function to redirect to Wristband's hosted login page.
-  await wristbandAuth.login(req, res);
+  // Call the Wristband login() function and redirect to Wristband's hosted login page.
+  const authorizeUrl = await wristbandAuth.login(req, res);
+  res.redirect(authorizeUrl);
 });
 
 // ...other endpoints here...
@@ -139,8 +140,9 @@ app.get('/auth/logout', async (req, res) => {
   // Destroy your application session.
   req.session.destroy();
 
-  // Call the Wristband logout() function to redirect to Wristband's Logout URL.
-  await wristbandAuth.logout(req, res, { tenantDomainName, refreshToken });
+  // Call the Wristband logout() function and redirect to Wristband's Logout URL.
+  const logoutUrl = await wristbandAuth.logout(req, res, { tenantDomainName, refreshToken });
+  res.redirect(logoutUrl);
 });`,
     },
   },
@@ -169,8 +171,9 @@ export class AuthController {
   // Login Endpoint - Route path can be whatever you prefer
   @Get('login')
   async login(@Req() req: Request, @Res() res: Response) {
-    // Call the Wristband login() function to redirect to Wristband's hosted login page.
-    return await this.wristbandAuth.login(req, res);
+    // Call the Wristband login() function and redirect to Wristband's hosted login page.
+    const authorizeUrl = await this.wristbandAuth.login(req, res);
+    res.redirect(authorizeUrl);
   }
 
   // ...other endpoints here...
@@ -218,8 +221,9 @@ export class AuthController {
     // Destroy your application session.
     req.session.destroy();
 
-    // Call the Wristband logout() function to redirect to Wristband's Logout URL.
-    return await this.wristbandAuth.logout(req, res, { refreshToken, tenantDomainName });
+    // Call the Wristband logout() function and redirect to Wristband's Logout URL.
+    const logoutUrl = await this.wristbandAuth.logout(req, res, { refreshToken, tenantDomainName });
+    res.redirect(logoutUrl);
   }
 }`,
     },
@@ -241,8 +245,9 @@ import wristbandAuth from '@/wristband-auth.ts';
 
 // Login Endpoint
 export async function GET(req: NextRequest) {
-  // Call the Wristband login() function to redirect to Wristband's hosted login page.
-  return await wristbandAuth.appRouter.login(req);
+  // Call the Wristband login() function and redirect to Wristband's hosted login page.
+  const authorizeUrl = await wristbandAuth.appRouter.login(req);
+  res.redirectUrl(authorizeUrl);
 }`,
     },
     callback: {
@@ -285,8 +290,9 @@ export async function GET(req: NextRequest) {
   // Destroy your application session.
   session.destroy();
 
-  // Call the Wristband logout() function to redirect to Wristband's Logout URL.
-  return await wristbandAuth.appRouter.logout(req, { refreshToken, tenantDomainName });
+  // Call the Wristband logout() function and redirect to Wristband's Logout URL.
+  const logoutUrl = await wristbandAuth.appRouter.logout(req, { refreshToken, tenantDomainName });
+  res.redirect(logoutUrl);
 });`,
     },
   },
