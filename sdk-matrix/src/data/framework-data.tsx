@@ -1,5 +1,5 @@
 import { Framework } from "@/types"
-import { DotnetIcon, ExpressIcon, NestIcon, NextIcon } from '@/components/framework-icons';
+import { DotnetIcon, ExpressIcon, NestIcon, NextIcon, PythonIcon } from '@/components/framework-icons';
 
 /* ***** .NET ***** */
 const dotnetFramework: Framework = {
@@ -42,7 +42,7 @@ app.MapGet("/auth/callback", async (
     HttpContext httpContext,
     IWristbandAuthService wristbandAuth) =>
 {
-    // Call the Wristband Callback() method to get authentication results, token data, and user info.
+    // Call the Wristband Callback() method to get auth results, token data, and user info.
     var callbackResult = await wristbandAuth.Callback(httpContext);
 
     // ...save session data...
@@ -111,13 +111,13 @@ export default app;`,
     callback: {
       name: 'Callback Endpoint',
       language: 'javascript',
-      code: `import type { CallbackResultType } from '@wristband/express-auth';
+      code: `import { CallbackResult } from '@wristband/express-auth';
 import { wristbandAuth } from './wristband-auth.ts';
 
 // Callback Endpoint - Route path can be whatever you prefer
 app.get('/auth/callback', async (req, res) => {
-  // Call the Wristband callback() function to get authentication results, token data, and user info.
-  const callbackResult = await wristbandAuth.callback(req, res);
+  // Call the Wristband callback() function to get auth results, token data, and user info.
+  const callbackResult: CallbackResult = await wristbandAuth.callback(req, res);
   const { callbackData } = callbackResult;
 
   // ...save session data...
@@ -144,6 +144,73 @@ app.get('/auth/logout', async (req, res) => {
   const logoutUrl = await wristbandAuth.logout(req, res, { tenantDomainName, refreshToken });
   res.redirect(logoutUrl);
 });`,
+    },
+  },
+}
+
+/* ***** Django ***** */
+const djangoFramework: Framework = {
+  id: 'django',
+  name: 'Django',
+  icon: (selected) => <PythonIcon selected={selected} />,
+  samples: {
+    login: {
+      name: 'Login Endpoint',
+      language: 'python',
+      code: `from django.http import HttpRequest, HttpResponse
+from django.views import View
+from ..wristband import wristband_auth
+
+// Login Endpoint - Route path can be whatever you prefer
+class Login(View):
+    def get(self, request: HttpRequest) -> HttpResponse:
+        return wristband_auth.login(request)`,
+    },
+    callback: {
+      name: 'Callback Endpoint',
+      language: 'python',
+      code: `from django.http import HttpRequest, HttpResponse
+from django.views import View
+from wristband.django_auth import CallbackData, CallbackResult
+from ..wristband import wristband_auth
+
+// Callback Endpoint - Route path can be whatever you prefer
+class Callback(View):
+    def get(self, request: HttpRequest) -> HttpResponse:
+        // Call the Wristband callback() method to get auth results, token data, and user info.
+        callback_result: CallbackResult = wristband_auth.callback(request)
+
+        // ...save session data...
+        callback_data: CallbackData = callback_result.callback_data
+        request.session["wristband"] = callback_data
+
+        // Send the user back to the application.
+        tenant: str = callback_data.tenant_domain_name
+        return wristband_auth.create_callback_response(request, f"https://{tenant}.example.com")
+`,
+    },
+    logout: {
+      name: 'Logout Endpoint',
+      language: 'python',
+      code: `from django.http import HttpRequest, HttpResponse
+from django.views import View
+from wristband.django_auth import LogoutConfig
+from ..wristband import wristband_auth
+
+// Logout Endpoint - Route path can be whatever you prefer
+class Logout(View):
+    def get(self, request: HttpRequest) -> HttpResponse:
+        // Get session data
+        wristband_session_data = request.session.get("wristband", {})
+        refresh_token: str = wristband_session_data.get("refresh_token")
+        tenant: str = wristband_session_data.get("tenant_domain_name")
+
+        // Destroy your application session.
+        request.session.flush()
+
+        // Call the Wristband logout() method and redirect to Wristband's Logout URL.
+        logout_config = LogoutConfig(refresh_token=refresh_token, tenant_domain_name=tenant)
+        return wristband_auth.logout(request, logout_config)`,
     },
   },
 }
@@ -191,7 +258,7 @@ export class AuthController {
   // Callback Endpoint - Route path can be whatever you prefer
   @Get('callback')
   async callback(@Req() req: Request, @Res() res: Response) {
-    // Call the Wristband callback() function to get authentication results, token data, and user info.
+    // Call the Wristband callback() function to get auth results, token data, and user info.
     const callbackResult: CallbackResult = await this.wristbandAuthService.callback(req, res);
     const { callbackData } = callbackResult;
 
@@ -255,13 +322,13 @@ export async function GET(req: NextRequest) {
       language: 'typescript',
       code: `// app/api/auth/callback/route.ts - Route path can be whatever you prefer
 import { NextRequest, NextResponse } from 'next/server';
-import { CallbackResultType } from '@wristband/nextjs-auth';
+import { CallbackResult } from '@wristband/nextjs-auth';
 import wristbandAuth from '@/wristband-auth.ts';
 
 // Callback Endpoint
 export async function GET(req: NextRequest) {
-  // Call the Wristband callback() function to get authentication results, token data, and user info.
-  const callbackResult = await wristbandAuth.appRouter.callback(req);
+  // Call the Wristband callback() function to get auth results, token data, and user info.
+  const callbackResult: CallbackResult = await wristbandAuth.appRouter.callback(req);
   const { callbackData } = callbackResult;
   const session = await getSession();
 
@@ -299,4 +366,10 @@ export async function GET(req: NextRequest) {
 };
 
 // Exports
-export const frameworks: Framework[] = [nextJsFramework, expressFramework, nestJsFramework, dotnetFramework];
+export const frameworks: Framework[] = [
+  nextJsFramework,
+  expressFramework,
+  djangoFramework,
+  nestJsFramework,
+  dotnetFramework
+];

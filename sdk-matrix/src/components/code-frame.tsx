@@ -8,7 +8,7 @@ import { Framework } from '@/types';
 // Styled components
 const FrameworkButton = styled(Box)(({ theme, selected }: { theme?: any; selected: boolean }) => ({
   width: 64.5,
-  height: 133,
+  height: 106,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -80,12 +80,8 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
               transition: '0.3s ease',
               '&.Mui-disabled': { opacity: 0 },
               width: '24px',
-              '&.MuiTabs-scrollButtonsHideMobile': {
-                display: 'flex',
-              },
-              '&:hover': {
-                backgroundColor: '#3a3c3d',
-              }
+              '&.MuiTabs-scrollButtonsHideMobile': { display: 'flex' },
+              '&:hover': { backgroundColor: '#3a3c3d' }
             },
             '& .MuiTab-root': {
               color: '#FFFFFF',
@@ -94,14 +90,8 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
               marginRight: 2,
               transition: '0.3s ease',
               textTransform: 'none',
-              '&:hover': {
-                backgroundColor: '#3a3c3d',
-                color: '#64AFFF',
-              },
-              '&.Mui-selected': {
-                color: '#64AFFF',
-                borderBottomColor: '#64AFFF',
-              },
+              '&:hover': { backgroundColor: '#3a3c3d', color: '#64AFFF' },
+              '&.Mui-selected': { color: '#64AFFF', borderBottomColor: '#64AFFF' },
             },
           }}>
           <Tab value="login" sx={{ fontFamily: 'Inter', fontWeight: 400 }} label={isMobile ? "Login" : "Login Endpoint"} />

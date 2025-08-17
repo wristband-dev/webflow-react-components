@@ -6,7 +6,9 @@ import {
   nestJsLogoBlack,
   nestJsLogoWhite,
   nextJsLogoBlack,
-  nextJsLogoWhite
+  nextJsLogoWhite,
+  pythonLogoBlack,
+  pythonLogoWhite
 } from '@/components/raw-icon-svgs';
 import { ReactNode } from 'react';
 
@@ -18,6 +20,8 @@ const nestJsBlack = nestJsLogoBlack();
 const nestJsWhite = nestJsLogoWhite();
 const nextJsBlack = nextJsLogoBlack();
 const nextJsWhite = nextJsLogoWhite();
+const pythonBlack = pythonLogoBlack();
+const pythonWhite = pythonLogoWhite();
 
 type IconProps = {
   selected?: boolean;
@@ -53,6 +57,13 @@ export const ExpressIcon = ({ selected }: IconProps) => (
     {selected ? expressBlack : expressWhite}
   </FrameworkIconContainer>
 );
+
+export const PythonIcon = ({ selected }: IconProps) => (
+  <FrameworkIconContainer id="python-icon-container">
+    {selected ? pythonBlack : pythonWhite}
+  </FrameworkIconContainer>
+);
+
 
 export const NestIcon = ({ selected }: IconProps) => (
   <FrameworkIconContainer id="nestjs-icon-container">
