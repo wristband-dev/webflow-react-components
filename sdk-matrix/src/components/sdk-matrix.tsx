@@ -8,7 +8,7 @@ export const SdkMatrix: React.FC = () => {
   return (
     <Box sx={{ 
       width: '100%', 
-      height: '532px',
+      height: '542px',
       maxWidth: '961px',
       margin: '0 auto',
     }}>
