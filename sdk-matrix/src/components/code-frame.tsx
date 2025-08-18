@@ -7,8 +7,8 @@ import { Framework } from '@/types';
 
 // Styled components
 const FrameworkButton = styled(Box)(({ theme, selected }: { theme?: any; selected: boolean }) => ({
-  width: 64.5,
-  height: 106,
+  width: 65,
+  height: 108,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
