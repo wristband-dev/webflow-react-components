@@ -14,7 +14,9 @@ export default defineConfig(({ command }) => {
   const isProduction = command === 'build';
 
   if (!assetsBaseUrl && isProduction) {
-    throw new Error('Environment variable [VITE_ASSETS_BASE_URL] is not set. Did you configure your .env.local file correctly?'); 
+    throw new Error(
+      'Environment variable [VITE_ASSETS_BASE_URL] is not set. Did you configure your .env.local file correctly?'
+    );
   }
 
   if (!version) {
@@ -24,10 +26,7 @@ export default defineConfig(({ command }) => {
   return {
     root: 'src',
     base: isProduction ? `${assetsBaseUrl}/${version}/` : '/',
-    plugins: [
-      react(),
-      visualizer({ open: false, gzipSize: true })
-    ],
+    plugins: [react(), visualizer({ open: false, gzipSize: true })],
     build: {
       outDir: '../dist',
       emptyOutDir: true,
@@ -40,9 +39,9 @@ export default defineConfig(({ command }) => {
           format: 'umd',
           entryFileNames: 'wristband-sdk-matrix.js',
           assetFileNames: 'assets/[name].[ext]',
-          globals: { 'react': 'React', 'react-dom': 'ReactDOM' }
-        }
-      }
+          globals: { react: 'React', 'react-dom': 'ReactDOM' },
+        },
+      },
     },
     resolve: {
       alias: {

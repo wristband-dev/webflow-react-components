@@ -8,7 +8,7 @@ import {
   nextJsLogoBlack,
   nextJsLogoWhite,
   pythonLogoBlack,
-  pythonLogoWhite
+  pythonLogoWhite,
 } from '@/components/raw-icon-svgs';
 import { ReactNode } from 'react';
 
@@ -25,54 +25,45 @@ const pythonWhite = pythonLogoWhite();
 
 type IconProps = {
   selected?: boolean;
-}
+};
 
 type FrameworkIconContainerProps = {
   children: ReactNode;
   id: string;
-}
+};
 
-const FrameworkIconContainer: React.FC<FrameworkIconContainerProps> = ({ children, id }) => (
-  <div id="" style={{
-    width: '44px',
-    height: '44px',
-    transition: 'filter 0.3s ease',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    pointerEvents: 'none',
-  }}>
+const FrameworkIconContainer: React.FC<FrameworkIconContainerProps> = ({ children }) => (
+  <div
+    id=""
+    style={{
+      width: '44px',
+      height: '44px',
+      transition: 'filter 0.3s ease',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      pointerEvents: 'none',
+    }}>
     {children}
   </div>
 );
 
 export const NextIcon = ({ selected }: IconProps) => (
-  <FrameworkIconContainer id="nextjs-icon-container">
-    {selected ? nextJsBlack : nextJsWhite}
-  </FrameworkIconContainer>
+  <FrameworkIconContainer id="nextjs-icon-container">{selected ? nextJsBlack : nextJsWhite}</FrameworkIconContainer>
 );
 
 export const ExpressIcon = ({ selected }: IconProps) => (
-  <FrameworkIconContainer id="express-icon-container">
-    {selected ? expressBlack : expressWhite}
-  </FrameworkIconContainer>
+  <FrameworkIconContainer id="express-icon-container">{selected ? expressBlack : expressWhite}</FrameworkIconContainer>
 );
 
 export const PythonIcon = ({ selected }: IconProps) => (
-  <FrameworkIconContainer id="python-icon-container">
-    {selected ? pythonBlack : pythonWhite}
-  </FrameworkIconContainer>
+  <FrameworkIconContainer id="python-icon-container">{selected ? pythonBlack : pythonWhite}</FrameworkIconContainer>
 );
 
-
 export const NestIcon = ({ selected }: IconProps) => (
-  <FrameworkIconContainer id="nestjs-icon-container">
-    {selected ? nestJsBlack : nestJsWhite}
-  </FrameworkIconContainer>
+  <FrameworkIconContainer id="nestjs-icon-container">{selected ? nestJsBlack : nestJsWhite}</FrameworkIconContainer>
 );
 
 export const DotnetIcon = ({ selected }: IconProps) => (
-  <FrameworkIconContainer id="dotnet-icon-container">
-    {selected ? dotnetBlack : dotnetWhite}
-  </FrameworkIconContainer>
+  <FrameworkIconContainer id="dotnet-icon-container">{selected ? dotnetBlack : dotnetWhite}</FrameworkIconContainer>
 );
