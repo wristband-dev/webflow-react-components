@@ -6,12 +6,13 @@ import { frameworks } from '@/data/framework-data';
 
 export const SdkMatrix: React.FC = () => {
   return (
-    <Box sx={{ 
-      width: '100%', 
-      height: '542px',
-      maxWidth: '961px',
-      margin: '0 auto',
-    }}>
+    <Box
+      sx={{
+        width: '100%',
+        height: '542px',
+        maxWidth: '961px',
+        margin: '0 auto',
+      }}>
       <CodeFrame frameworks={frameworks} />
     </Box>
   );

@@ -6,6 +6,7 @@ import { useMediaQuery } from '@mui/material';
 import { Framework } from '@/types';
 
 // Styled components
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const FrameworkButton = styled(Box)(({ theme, selected }: { theme?: any; selected: boolean }) => ({
   width: 65,
   height: 108,
@@ -37,7 +38,7 @@ interface CodeFrameProps {
 export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
   const [selectedFramework, setSelectedFramework] = useState<string>(frameworks[1].id);
   const [selectedTab, setSelectedTab] = useState<string>('login');
-  const isMobile = useMediaQuery('(max-width:767px)');  
+  const isMobile = useMediaQuery('(max-width:767px)');
   const currentFramework = frameworks.find((f) => f.id === selectedFramework)!;
   const currentSample = currentFramework.samples[selectedTab as keyof typeof currentFramework.samples];
 
@@ -51,8 +52,7 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
             <FrameworkButton
               key={framework.id}
               selected={isSelected}
-              onClick={() => setSelectedFramework(framework.id)}
-            >
+              onClick={() => setSelectedFramework(framework.id)}>
               {framework.icon(isSelected)}
             </FrameworkButton>
           );
@@ -60,13 +60,14 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
       </Stack>
 
       {/* Main content area */}
-      <Box sx={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        border: '1px solid #5A5757',
-        overflow: 'scroll !important'
-      }}>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          border: '1px solid #5A5757',
+          overflow: 'scroll !important',
+        }}>
         {/* Tab navigation */}
         <Tabs
           value={selectedTab}
@@ -81,7 +82,7 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
               '&.Mui-disabled': { opacity: 0 },
               width: '24px',
               '&.MuiTabs-scrollButtonsHideMobile': { display: 'flex' },
-              '&:hover': { backgroundColor: '#3a3c3d' }
+              '&:hover': { backgroundColor: '#3a3c3d' },
             },
             '& .MuiTab-root': {
               color: '#FFFFFF',
@@ -94,9 +95,21 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
               '&.Mui-selected': { color: '#64AFFF', borderBottomColor: '#64AFFF' },
             },
           }}>
-          <Tab value="login" sx={{ fontFamily: 'Inter', fontWeight: 400 }} label={isMobile ? "Login" : "Login Endpoint"} />
-          <Tab value="callback" sx={{ fontFamily: 'Inter', fontWeight: 400 }} label={isMobile ? "Callback" : "Callback Endpoint"} />
-          <Tab value="logout" sx={{ fontFamily: 'Inter', fontWeight: 400 }} label={isMobile ? "Logout" : "Logout Endpoint"} />
+          <Tab
+            value="login"
+            sx={{ fontFamily: 'Inter', fontWeight: 400 }}
+            label={isMobile ? 'Login' : 'Login Endpoint'}
+          />
+          <Tab
+            value="callback"
+            sx={{ fontFamily: 'Inter', fontWeight: 400 }}
+            label={isMobile ? 'Callback' : 'Callback Endpoint'}
+          />
+          <Tab
+            value="logout"
+            sx={{ fontFamily: 'Inter', fontWeight: 400 }}
+            label={isMobile ? 'Logout' : 'Logout Endpoint'}
+          />
         </Tabs>
 
         {/* Code display */}
@@ -120,8 +133,7 @@ export const CodeFrame: React.FC<CodeFrameProps> = ({ frameworks }) => {
                   overflow: 'auto',
                   width: 'max-content',
                   minWidth: '100%',
-                }}
-              >
+                }}>
                 {tokens.map((line, i) => (
                   <div key={i} {...getLineProps({ className, line, style: { background: 'transparent' } })}>
                     {line.map((token, key) => (

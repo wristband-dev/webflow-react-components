@@ -14,6 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "isolatedModules": true,
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["src/*"]
     }

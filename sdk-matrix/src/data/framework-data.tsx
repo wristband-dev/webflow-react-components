@@ -1,4 +1,4 @@
-import { Framework } from "@/types"
+import { Framework } from '@/types';
 import { DotnetIcon, ExpressIcon, NestIcon, NextIcon, PythonIcon } from '@/components/framework-icons';
 
 /* ***** .NET ***** */
@@ -81,7 +81,7 @@ app.MapGet("/auth/logout", async (
 });`,
     },
   },
-}
+};
 
 /* ***** Express ***** */
 const expressFramework: Framework = {
@@ -146,7 +146,7 @@ app.get('/auth/logout', async (req, res) => {
 });`,
     },
   },
-}
+};
 
 /* ***** Django ***** */
 const djangoFramework: Framework = {
@@ -213,7 +213,7 @@ class Logout(View):
         return wristband_auth.logout(request, logout_config)`,
     },
   },
-}
+};
 
 /* ***** NestJS ***** */
 const nestJsFramework: Framework = {
@@ -295,7 +295,7 @@ export class AuthController {
 }`,
     },
   },
-}
+};
 
 /* ***** NextJS ***** */
 const nextJsFramework: Framework = {
@@ -371,5 +371,5 @@ export const frameworks: Framework[] = [
   expressFramework,
   djangoFramework,
   nestJsFramework,
-  dotnetFramework
+  dotnetFramework,
 ];
